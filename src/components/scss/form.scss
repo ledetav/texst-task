@@ -16,6 +16,7 @@
     .input__product_price {
       margin: 0 0 16px 0;
       width: 284px;
+
     }
 
     .product_name,
@@ -30,6 +31,8 @@
 
       padding-left: 16px;
 
+      transition: all 0.5s;
+
       &::placeholder {
         font-family: 'Source Sans Pro';
         font-style: normal;
@@ -38,6 +41,11 @@
         line-height: 15px;
 
         color: #B4B4B4;
+      }
+      &:focus {
+        outline: none;
+        background-color: rgba(180, 180, 180, 0.15);
+        transition: all 0.5s;
       }
     }
     .product_name,
