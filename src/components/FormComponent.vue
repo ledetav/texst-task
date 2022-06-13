@@ -14,7 +14,9 @@
         }"
       />
       <span class="error" v-if="v$.name.$error">
-        <template v-if="v$.name.required.$invalid"> Поле является обязательным. </template>
+        <template v-if="v$.name.required.$invalid">
+          Поле является обязательным.
+        </template>
       </span>
     </div>
     <div class="input__product_desc">
@@ -45,21 +47,20 @@
     <div class="input__product_price">
       <p class="form__text">Цена товара<span>*</span></p>
       <input
-        type="number"
+        type="text"
         class="product_price"
         placeholder="Введите цену"
         v-model="price"
-        @blur="v$.price.$touch()"
+        @blur="v$.price.$touch() & addMask()"
         :class="{
           error_input: v$.price.$error === true,
           norm_input: v$.price.$error === false,
         }"
       />
       <span class="error" v-if="v$.price.$error">
-        <template v-if="v$.price.min.$invalid">
-          Цена не может быть отрицательной или равной нулю.
+        <template v-if="v$.price.required.$invalid">
+          Поле является обязательным.
         </template>
-        <template v-else> Поле является обязательным. </template>
       </span>
     </div>
     <div>
@@ -68,20 +69,29 @@
         :disabled="
           v$.name.$error === true ||
           v$.img.$error === true ||
-          v$.price.$error === true
+          v$.price.$error === true ||
+          name == null ||
+          img == null ||
+          price == null
         "
         :class="[
           {
             disabled_btn:
               v$.name.$error === true ||
               v$.img.$error === true ||
-              v$.price.$error === true,
+              v$.price.$error === true ||
+              name == null ||
+              img == null ||
+              price == null,
           },
           {
             normal_btn:
               v$.name.$error === false &&
               v$.img.$error === false &&
-              v$.price.$error === false,
+              v$.price.$error === false &&
+              name != null &&
+              img != null &&
+              price != null,
           },
         ]"
       >
@@ -92,31 +102,30 @@
 </template>
 <script>
 import useValidate from "@vuelidate/core";
-import { required, url, minValue } from "@vuelidate/validators";
+import { required, url } from "@vuelidate/validators";
 export default {
   data() {
     return {
       v$: useValidate(),
-      name: "",
-      img: "",
-      price: "",
-      errorClass: "error_input",
-      activeClass: "norm_input",
+      name: null,
+      img: null,
+      price: null,
     };
   },
   validations() {
     return {
-      name: { required, error: true },
+      name: { required },
       img: { required, url },
-      price: { required, min: minValue(1) },
+      price: { required },
     };
   },
   methods: {
-    class() {
-      this.v$.$validate();
-      if (this.v$.name.$error) {
-        this.errorName = true;
+    addMask() {
+      var price = this.price;
+      function mask(price) {
+        return price.replace(/\B(?=(\d{3})+(?!\d))/g, " ");
       }
+      this.price = mask(price);
     },
   },
 };
