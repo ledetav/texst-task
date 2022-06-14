@@ -1,10 +1,11 @@
 <template>
   <div class="cards">
     <product-card
-      v-for="n in 6"
-      :key="n"
+      v-for="product in products"
+      :key="product.index"
       :name="product.name"
       :description="product.desc"
+      :img="product.img"
       :price="product.price"
     ></product-card>
   </div>
@@ -17,25 +18,17 @@ export default {
   components: {
     ProductCard,
   },
-  data() {
-    return {
-      product: {
-        name: "Наименование товара",
-        desc: "Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк",
-        price: "10 000 руб.",
-      },
-    };
-  },
+  props: ['products'],
 };
 </script>
 
 <style lang="sass" scoped>
 .cards
-    margin-left: 16px
-    display: flex
-    flex-direction: row
-    flex-wrap: wrap
-    align-content: flex-start
-    justify-content: space-around
-    align-content: space-between
+  margin-left: 16px
+  display: flex
+  flex-direction: row
+  flex-wrap: wrap
+  align-content: flex-start
+  justify-content: space-around
+  align-content: space-between
 </style>
