@@ -1,0 +1,56 @@
+@import "_variables.scss";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 32px;
+    background: $window_bg;
+}
+
+.products {
+    display: flex;
+}
+
+.name,
+.form {
+    left: 32px;
+}
+
+.name {
+    width: 247px;
+    height: 35px;
+    top: 32px;
+
+    font-family: "Source Sans Pro", sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 35px;
+
+    color: $main_text__color;
+}
+
+.filter {
+    position: absolute;
+    width: 122px;
+    height: 36px;
+    top: 31px;
+    left: calc(87% + 30px);
+    padding: 10px 0 11px 16px;
+
+    background: #FFFEFB;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+
+    color: $btn_add__text_color;
+}
