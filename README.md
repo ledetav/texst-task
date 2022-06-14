@@ -1,4 +1,6 @@
-# card
+# Frontend test task
+
+Node.js version: v16.13.1;
 
 ## Project setup
 ```
